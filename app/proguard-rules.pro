@@ -1,32 +1,53 @@
-# Android SDK default rules
+# =====================
+# Android SDK Rules
+# =====================
 -keep class android.support.** { *; }
 -keep class androidx.** { *; }
 
-# OkHttp (networking)
+# =====================
+# Retrofit + OkHttp
+# =====================
 -dontwarn okhttp3.**
+-dontwarn retrofit2.**
 -keep class okhttp3.** { *; }
 -keep interface okhttp3.** { *; }
-
-# Retrofit (networking and serialization)
--dontwarn retrofit2.**
 -keep class retrofit2.** { *; }
 -keep interface retrofit2.** { *; }
 
-# Gson (JSON serialization)
+# =====================
+# Gson
+# =====================
 -keep class com.google.gson.** { *; }
 -dontwarn com.google.gson.**
+-keepattributes Signature
+-keepattributes *Annotation*
+-keep @interface com.google.gson.annotations.SerializedName
 
-# WebView JS interface (optional)
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+# =====================
+# WebView JS Interface (optional)
+# Uncomment if using WebView + JS
+# -keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
-#}
+# }
 
-# Preserve Kotlin Metadata
+# =====================
+# Kotlin Metadata
+# =====================
 -keep class kotlin.Metadata { *; }
 -dontwarn kotlin.**
 
-# Keep all annotations
--keepattributes *Annotation*
+# =====================
+# Lifecycle + ViewModel
+# =====================
+-keep class androidx.lifecycle.ViewModel { *; }
 
-# Application entry point
--keep class com.gitnova.app.MainActivity { *; }
+# =====================
+# App Entry Points
+# =====================
+-keep class com.gitnova.app.** { *; }
+
+# =====================
+# Javax annotations (required for some libs)
+# =====================
+-dontwarn javax.annotation.**
+-keep class javax.annotation.** { *; }
