@@ -3,16 +3,17 @@ package com.gitnova.app
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_splash)
 
-        // Set theme or splash screen layout if you have
-        Handler().postDelayed({
+        Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this, MainActivity::class.java))
             finish()
-        }, 2000) // 2 seconds
+        }, 3000) // 3 seconds delay
     }
 }
