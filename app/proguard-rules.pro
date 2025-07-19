@@ -1,53 +1,26 @@
-# =====================
-# Android SDK Rules
-# =====================
--keep class android.support.** { *; }
--keep class androidx.** { *; }
-
-# =====================
-# Retrofit + OkHttp
-# =====================
+# Preserve OkHttp classes
 -dontwarn okhttp3.**
--dontwarn retrofit2.**
 -keep class okhttp3.** { *; }
 -keep interface okhttp3.** { *; }
+
+# Preserve Retrofit (optional)
+-dontwarn retrofit2.**
 -keep class retrofit2.** { *; }
--keep interface retrofit2.** { *; }
 
-# =====================
-# Gson
-# =====================
--keep class com.google.gson.** { *; }
--dontwarn com.google.gson.**
--keepattributes Signature
--keepattributes *Annotation*
--keep @interface com.google.gson.annotations.SerializedName
+# Preserve model classes
+-keepclassmembers class * {
+    @com.google.gson.annotations.SerializedName <fields>;
+}
 
-# =====================
-# WebView JS Interface (optional)
-# Uncomment if using WebView + JS
-# -keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-# }
+# Enable shrinking and obfuscation
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
 
-# =====================
-# Kotlin Metadata
-# =====================
--keep class kotlin.Metadata { *; }
--dontwarn kotlin.**
-
-# =====================
-# Lifecycle + ViewModel
-# =====================
--keep class androidx.lifecycle.ViewModel { *; }
-
-# =====================
-# App Entry Points
-# =====================
--keep class com.gitnova.app.** { *; }
-
-# =====================
-# Javax annotations (required for some libs)
-# =====================
--dontwarn javax.annotation.**
--keep class javax.annotation.** { *; }
+# Preserve custom views
+-keep public class * extends android.view.View {
+    public <init>(android.content.Context);
+    public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
