@@ -1,29 +1,23 @@
-# Retrofit
--keep class retrofit2.** { *; }
--dontwarn retrofit2.**
-
-# OkHttp
+# ProGuard rules for GITNova
 -dontwarn okhttp3.**
 -keep class okhttp3.** { *; }
 -keep interface okhttp3.** { *; }
 
-# Gson
--keep class com.google.gson.** { *; }
--dontwarn com.google.gson.**
+# Keep application classes
+-keep class com.yourpackage.** { *; }
 
-# Glide
--keep public class * implements com.bumptech.glide.module.GlideModule
--keep public class * extends com.bumptech.glide.module.AppGlideModule
--keep class com.bumptech.glide.** { *; }
--dontwarn com.bumptech.glide.**
-
-# Firebase (optional)
--dontwarn com.google.firebase.**
--keep class com.google.firebase.** { *; }
-
-# General
+# If you're using Retrofit or Gson:
+-keepattributes Signature
 -keepattributes *Annotation*
--keep class * extends java.lang.annotation.Annotation { *; }
--keepclasseswithmembers class * {
-    @android.webkit.JavascriptInterface <methods>;
-}
+
+# For Kotlin metadata
+-keep class kotlin.Metadata { *; }
+
+# Keep UI
+-keep class android.support.** { *; }
+-keep class androidx.** { *; }
+
+# Optional for WebView JS interface
+#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+#    public *;
+#}
